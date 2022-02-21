@@ -1,4 +1,10 @@
-.product {
-  width: 100%;
-  max-width: 400px;
+.products {
+  .product {
+    width: 100%;
+    max-width: 400px;
+  
+    img {
+      width: 100%;
+    }
+  }
 }

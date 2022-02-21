@@ -12,6 +12,8 @@ Encore
   // public path used by the web server to access the output path
   .setPublicPath("/build")
 
+  .addEntry('app', './assets/app.js')
+  
   .copyFiles({
     from: "./assets/images",
     to: "images/[path][name].[ext]"

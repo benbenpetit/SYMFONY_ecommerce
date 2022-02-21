@@ -1,0 +1,25 @@
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: #222;
+  pointer-events: none;
+  transform-origin: top center;
+  transform: scaleY(1);
+  transition: transform 1s cubic-bezier(0.85, 0, 0.2, 1) 0.3s;
+  z-index: 9999;
+}
+
+.content {
+  .page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  
+    main {
+      flex-grow: 1;
+    }
+  }
+}

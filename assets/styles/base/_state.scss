@@ -1,0 +1,7 @@
+html {
+  &.is-loaded {
+    .loader {
+      transform: scaleY(0);
+    }
+  }
+}

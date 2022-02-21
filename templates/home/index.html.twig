@@ -1,10 +1,8 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
-
 {% block body %}
 <div>
-    <ul>
+    <ul class="products">
         {% for product in products %}
             <li class="product">
                 <h1>{{ product.name }}</h1>
