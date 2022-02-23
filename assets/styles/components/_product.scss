@@ -1,0 +1,18 @@
+.product {
+  a {
+    display: block;
+
+    .image {
+      height: 500px;
+      background-position: center center;
+      background-size: cover;
+      transition: background-size .4s cubic-bezier(0.4, 0, 0, 1) .05s;
+    }
+
+    .title {
+      margin-top: 6px;
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}

@@ -17,6 +17,9 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "axios": "^0.26.0",
+        "locomotive-scroll": "^4.1.4",
+        "modularload": "^1.2.8",
         "sass": "^1.49.4",
         "sass-loader": "^12.4.0"
     }

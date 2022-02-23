@@ -3,7 +3,8 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>
-			{% block title %}Sheesh-irts® | Free delivery crazy week{% endblock %}
+			{% block title %}Sheesh-irts® | Free delivery crazy week
+			{% endblock %}
 		</title>
 		<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
 		{% block stylesheets %}
@@ -14,12 +15,22 @@
 		{% endblock %}
 	</head>
 	<body>
-        <div class="loader"></div>
-		<div class="content">
-			<header></header>
-			<div class="page">
+		<div class="loader"></div>
+		<div class="content" data-load-container>
+			<header class="primary-nav">
+				<nav aria-label="primary navigation">
+					<ul>
+						<li><a href="/">Home</a></li>
+						<li><a href="/register">Register</a></li>
+						<li><a href="/login">Login</a></li>
+						<li><a href="/logout">Logout</a></li>
+					</ul>
+				</nav>
+			</header>
+			<div class="page" data-scroll-container>
 				<main>
-					{% block body %}{% endblock %}
+					{% block body %}
+					{% endblock %}
 				</main>
 				<footer></footer>
 			</div>

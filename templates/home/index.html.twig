@@ -1,16 +1,19 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<div>
-    <ul class="products">
-        {% for product in products %}
-            <li class="product">
-                <h1>{{ product.name }}</h1>
-                <p>{{ product.description }}</p>
-                <span>{{ product.price }}€</span>
-                <img src="{{ asset('build/images/' ~ product.imagePath) }}" alt="">
-            </li>
-        {% endfor %}
-    </ul>
-</div>
+	<section class="container big-padding" data-scroll-section style="height: 300vh">
+		<ul class="products">
+			{% for product in products %}
+				<li class="product" data-id="{{ product.id }}">
+					<a>
+						<div class="image" style="background-image: url({{ asset('build/images/' ~ product.imagePath) }})"></div>
+						<div class="title">
+							<span>{{ product.name }}</span>
+							<span>{{ product.price }}€</span>
+						</div>
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	</section>
 {% endblock %}
