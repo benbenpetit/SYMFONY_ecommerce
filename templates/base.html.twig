@@ -13,6 +13,7 @@
 		{% block javascripts %}
 			{{ encore_entry_script_tags('app') }}
 		{% endblock %}
+		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	</head>
 	<body>
 		<div class="loader"></div>
@@ -20,10 +21,11 @@
 			<header class="primary-nav">
 				<nav aria-label="primary navigation">
 					<ul>
-						<li><a href="/">Home</a></li>
-						<li><a href="/register">Register</a></li>
-						<li><a href="/login">Login</a></li>
-						<li><a href="/logout">Logout</a></li>
+						<li><a href="{{ path('home') }}">Home</a></li>
+						<li><a href="{{ path('register') }}">Register</a></li>
+						<li><a href="{{ path('login') }}">Login</a></li>
+						<li><a href="{{ path('logout') }}">Logout</a></li>
+						<li><a href="{{ path('cart') }}">Cart</a></li>
 					</ul>
 				</nav>
 			</header>

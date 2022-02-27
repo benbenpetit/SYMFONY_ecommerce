@@ -1,12 +1,12 @@
 import './styles/style.scss';
-import './scripts/item';
 import modularLoad from 'modularload';
 import LocomotiveScroll from 'locomotive-scroll';
 
 let scroll = new LocomotiveScroll({
   el: document.querySelector('[data-scroll-container]'),
   smooth: true,
-  multiplier: 1.2,
+  multiplier: 1,
+  lerp: 0.12
 });
 
 const load = new modularLoad({
@@ -18,6 +18,7 @@ load.on('loaded', () => {
   scroll = new LocomotiveScroll({
     el: document.querySelector('[data-scroll-container]'),
     smooth: true,
-    multiplier: 1.2,
+    multiplier: 1,
+    lerp: 0.12
   });
 });

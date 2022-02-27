@@ -13,6 +13,7 @@ Encore
   .setPublicPath("/build")
 
   .addEntry('app', './assets/app.js')
+  .addEntry('addToCart', './assets/scripts/addToCart.js')
   
   .copyFiles({
     from: "./assets/images",

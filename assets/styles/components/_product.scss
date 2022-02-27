@@ -13,6 +13,13 @@
       margin-top: 6px;
       display: flex;
       justify-content: space-between;
+
+      span:nth-child(1) {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        padding-right: 10px;
+      }
     }
   }
 }

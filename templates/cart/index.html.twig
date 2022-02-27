@@ -3,17 +3,30 @@
 {% block title %}Hello CartController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'D:/Benoit/OneDrive/SORBONNE/SYMFONY/ecommerce/src/Controller/CartController.php'|file_link(0) }}">src/Controller/CartController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'D:/Benoit/OneDrive/SORBONNE/SYMFONY/ecommerce/templates/cart/index.html.twig'|file_link(0) }}">templates/cart/index.html.twig</a></code></li>
-    </ul>
-</div>
+	<section class="container big-padding" data-scroll-section>
+		<div class="cart-wrapper">
+            <div class="listing">
+                <ul>
+                    {% for item in items %}
+                        <li class="item">
+                            <div class="item__left">
+                                <a href="{{ path('product', {'id': item.product.id}) }}">
+                                    <div class="img-wrapper">
+                                        <img src="{{ asset('/build/images/' ~ item.product.imagePath) }}" alt="">
+                                    </div>
+                                    <span class="name">{{item.product.name}}</span>
+                                </a>
+                            </div>
+                            <div class="item__right">
+                                <span class="quantity">{{item.quantity}}</span>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <aside class="recap" data-scroll data-scroll-sticky=".cart-wrapper">
+                <span class="recap__price">{{total}},00 €</span>
+            </aside>
+        </div>
+	</section>
 {% endblock %}

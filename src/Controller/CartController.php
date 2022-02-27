@@ -25,8 +25,6 @@ class CartController extends AbstractController
 
         $total = 0;
 
-        dd($cartWithData);
-
         foreach ($cartWithData as $item) {
             $totalItem = $item['product']->getPrice() * $item['quantity'];
             $total += $totalItem;
@@ -39,9 +37,13 @@ class CartController extends AbstractController
     }
 
     #[Route('/cart/add/{id}', name: 'cart_add')]
-    public function add($id, SessionInterface $session): Response
+    public function add($id, SessionInterface $session, ProductRepository $productRepository): Response
     {
         $cart = $session->get('cart', []);
+
+        if ($productRepository->find($id) == null) {
+            return new Response('Cannot find item with id ' . $id);
+        }
 
         if (!empty($cart[$id])) {
             $cart[$id]++;
@@ -51,9 +53,7 @@ class CartController extends AbstractController
 
         $session->set('cart', $cart);
 
-        return $this->render('cart/index.html.twig', [
-            'cart' => $cart
-        ]);
+        return new Response('Article added to cart');
     }
 
     #[Route('/cart/remove/{id}', name: 'cart_remove')]
@@ -66,8 +66,6 @@ class CartController extends AbstractController
         }
 
         $session->set('cart', $cart);
-
-        dd($cart);
 
         return $this->render('cart/index.html.twig');
     }

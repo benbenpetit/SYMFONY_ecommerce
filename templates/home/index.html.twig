@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<section class="container big-padding" data-scroll-section style="height: 300vh">
+	<section class="container big-padding" data-scroll-section>
 		<ul class="products">
 			{% for product in products %}
-				<li class="product" data-id="{{ product.id }}">
-					<a>
+				<li class="product">
+					<a href="{{ path('product', {'id': product.id}) }}">
 						<div class="image" style="background-image: url({{ asset('build/images/' ~ product.imagePath) }})"></div>
 						<div class="title">
-							<span>{{ product.name }}</span>
+							<span title="{{ product.name }}">{{ product.name }}</span>
 							<span>{{ product.price }}€</span>
 						</div>
 					</a>

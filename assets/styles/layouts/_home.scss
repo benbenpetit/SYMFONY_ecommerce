@@ -4,6 +4,6 @@
   gap: 40px;
 
   @media screen and (max-width: 480px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: 100%;
   }
 }

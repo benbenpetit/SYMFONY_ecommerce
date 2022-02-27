@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+	<section class="container big-padding" data-scroll-section>
+		<div class="product-wrapper">
+            <picture>
+                <img src="{{ asset('/build/images/' ~ product.imagePath) }}" alt="{{ product.name }}">
+            </picture>
+            <div class="content">
+                <img class="content__logo" src="{{ asset('/build/images/prada.svg') }}" alt="Logo de la marque Prada">
+                <h1 class="content__title">{{ product.name }}</h1>
+                <span class="content__price">{{ product.price }}€</span>
+                <p class="content__desc">{{ product.description }}</p>
+                <div class="validation-wrapper">
+                    <button class="btn-primary js-add-cart" data-id="{{ product.id }}">Ajout au panier</button>
+                    <div class="validation">
+                        <span class="validation__msg">Article ajouté</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</section>
+    <script>
+        const addButton = document.querySelector(".js-add-cart");
+        const validationWrapper = document.querySelector(".validation-wrapper");
+
+        addButton.addEventListener("click", () => {
+        const id = addButton.getAttribute("data-id");
+        addButton.setAttribute('disabled', true);
+
+        axios
+            .post(`/cart/add/${id}`)
+            .then(function (response) {
+            validationWrapper.classList.add('article-added');
+            setTimeout(() => {
+                validationWrapper.classList.remove('article-added');
+                addButton.removeAttribute('disabled');
+            }, 2000);
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
+        });
+    </script>
+{% endblock %}
