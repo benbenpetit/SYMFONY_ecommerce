@@ -2,11 +2,15 @@
 
 namespace App\Controller;
 
+use App\Entity\Command;
+use App\Repository\CommandRepository;
 use App\Repository\ProductRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 
 class CartController extends AbstractController
 {
@@ -68,5 +72,56 @@ class CartController extends AbstractController
         $session->set('cart', $cart);
 
         return $this->render('cart/index.html.twig');
+    }
+
+    #[Route('/cart/order', name: 'cart_order')]
+    public function order(Security $security, CommandRepository $commandRepository, ProductRepository $productRepository, SessionInterface $session, ManagerRegistry $doctrine): Response
+    {
+        $user = $security->getUser();
+        $cart = $session->get('cart', []);
+
+        if ($cart === []) {
+            return $this->redirectToRoute('cart');
+        }
+
+        if (!$user) {
+            return $this->redirectToRoute('login');
+        }
+
+        foreach ($cart as $id => $quantity) {
+            $cartWithData[] = [
+                'product' => $productRepository->find($id),
+                'quantity' => $quantity
+            ];
+        }
+
+        $total = 0;
+
+        foreach ($cartWithData as $item) {
+            $totalItem = $item['product']->getPrice() * $item['quantity'];
+            $total += $totalItem;
+        }
+
+        if ($user === null) {
+            return $this->redirectToRoute('cart');
+        }
+
+        $entityManager = $doctrine->getManager();
+        
+        $command = new Command();
+        $command->setDate(new \DateTime());
+        $command->setPrice($total);
+        $command->setUser($user);
+
+        foreach ($cart as $id => $quantity) {
+            $command->addProduct($productRepository->find($id));
+        }
+
+        $entityManager->persist($command);
+        $entityManager->flush();
+
+        $session->set('cart', []);
+
+        return $this->render('cart/order.html.twig');
     }
 }

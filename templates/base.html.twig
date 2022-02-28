@@ -12,21 +12,40 @@
 		{% endblock %}
 		{% block javascripts %}
 			{{ encore_entry_script_tags('app') }}
+			{{ encore_entry_script_tags('menu') }}
 		{% endblock %}
-		<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	</head>
-	<body>
-		<div class="loader"></div>
-		<div class="content" data-load-container>
+	<body data-barba="wrapper">
+		{# <div class="loader"></div> #}
+		<div class="content" data-barba="container">
 			<header class="primary-nav">
-				<nav aria-label="primary navigation">
-					<ul>
-						<li><a href="{{ path('home') }}">Home</a></li>
-						<li><a href="{{ path('register') }}">Register</a></li>
-						<li><a href="{{ path('login') }}">Login</a></li>
-						<li><a href="{{ path('logout') }}">Logout</a></li>
-						<li><a href="{{ path('cart') }}">Cart</a></li>
-					</ul>
+				<nav class="primary-nav__wrapper container" aria-label="primary navigation">
+					<a class="primary-nav__wrapper__left" href="{{ path('home') }}">Accueil</a>
+					<div class="primary-nav__wrapper__right">
+						<a class="primary-nav__wrapper__right__cart svg-box" href="{{ path('cart') }}">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+								<path fill-rule="evenodd" d="M10 2a4 4 0 00-4 4v1H5a1 1 0 00-.994.89l-1 9A1 1 0 004 18h12a1 1 0 00.994-1.11l-1-9A1 1 0 0015 7h-1V6a4 4 0 00-4-4zm2 5V6a2 2 0 10-4 0v1h4zm-6 3a1 1 0 112 0 1 1 0 01-2 0zm7-1a1 1 0 100 2 1 1 0 000-2z" clip-rule="evenodd" />
+							</svg>
+						</a>
+						<div class="primary-nav__wrapper__right__profile profile">
+							<button class="profile__icon js-profile-icon svg-box">
+								<svg class="js-profile-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+									<path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-6-3a2 2 0 11-4 0 2 2 0 014 0zm-2 4a5 5 0 00-4.546 2.916A5.986 5.986 0 0010 16a5.986 5.986 0 004.546-2.084A5 5 0 0010 11z" clip-rule="evenodd" />
+								</svg>
+							</button>
+							<div class="profile__modal js-profile-modal">
+								<ul class="profile__modal__menu">
+									{% if not app.user %}
+										<li class="profile__modal__menu__item"><a href="{{ path('register') }}">Inscription</a></li>
+										<li class="profile__modal__menu__item"><a href="{{ path('login') }}">Connexion</a></li>
+									{% else %}
+										<li class="profile__modal__menu__item"><a href="{{ path('user_profile') }}">Profil</a></li>
+										<li class="profile__modal__menu__item"><a href="{{ path('logout') }}">Déconnexion</a></li>
+									{% endif %}
+								</ul>
+							</div>
+						</div>
+					</div>
 				</nav>
 			</header>
 			<div class="page" data-scroll-container>

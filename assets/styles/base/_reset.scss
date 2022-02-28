@@ -45,10 +45,11 @@ picture {
 }
 
 button {
-  background-color: none;
+  background: none;
   outline: none;
   border: none;
   cursor: pointer;
+  padding: 0;
 }
 
 input,

@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+    <section class="big-padding container profile">
+        <h1>Commandes</h1>
+        <div class="commands">
+            <ul class="commands__list">
+                {% for command in commands %}
+                    <li class="commands__list__item">
+                        <div class="commands__list__item__left">
+                            <span>Commande n°{{ command.id }}</span>
+                        </div>
+                        <div class="commands__list__item__right">
+                            <span>le {{ command.date | date('d/m/Y') }}</span>
+                            <span>{{ command.price }},00€</span>
+                        </div>
+                    </li>
+                {% endfor %}  
+            </ul>
+        </div>
+    </section>
+{% endblock %}

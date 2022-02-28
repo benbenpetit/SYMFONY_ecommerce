@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CartController!{% endblock %}
+
+{% block body %}
+	<section class="container big-padding order" data-scroll-section>
+		<h1>Votre commande a bien été enregistrée!</h1>
+		<a href="{{ path('home') }}" class="btn-primary">Accueil</a>
+	</section>
+{% endblock %}
