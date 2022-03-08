@@ -5,6 +5,9 @@
 {% block body %}
 	<section class="container big-padding order" data-scroll-section>
 		<h1>Votre commande a bien été enregistrée!</h1>
-		<a href="{{ path('home') }}" class="btn-primary">Accueil</a>
+		<div class="order__link-wrapper">
+			<a href="{{ path('home') }}" class="btn-primary">Accueil</a>
+			<a href="{{ path('user_profile') }}" class="btn-primary">Commandes</a>
+		</div>
 	</section>
 {% endblock %}

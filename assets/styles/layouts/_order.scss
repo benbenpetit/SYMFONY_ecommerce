@@ -4,7 +4,11 @@
   align-items: center;
   justify-content: center;
 
-  a {
+  &__link-wrapper {
     margin-top: 20px;
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    justify-content: flex-start;
   }
 }

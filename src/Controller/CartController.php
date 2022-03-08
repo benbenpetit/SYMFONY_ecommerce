@@ -60,6 +60,28 @@ class CartController extends AbstractController
         return new Response('Article added to cart');
     }
 
+    #[Route('/cart/subtract/{id}', name: 'cart_subtract')]
+    public function subtract($id, SessionInterface $session, ProductRepository $productRepository): Response
+    {
+        $cart = $session->get('cart', []);
+
+        if ($productRepository->find($id) == null) {
+            return new Response('Cannot find item with id ' . $id);
+        }
+
+        if (!empty($cart[$id])) {
+            if ($cart[$id] === 1) {
+                unset($cart[$id]);
+            } else {
+                $cart[$id]--;
+            }
+        }
+
+        $session->set('cart', $cart);
+
+        return new Response('Article subtracted to cart');
+    }
+
     #[Route('/cart/remove/{id}', name: 'cart_remove')]
     public function remove($id, SessionInterface $session): Response
     {
@@ -75,7 +97,7 @@ class CartController extends AbstractController
     }
 
     #[Route('/cart/order', name: 'cart_order')]
-    public function order(Security $security, CommandRepository $commandRepository, ProductRepository $productRepository, SessionInterface $session, ManagerRegistry $doctrine): Response
+    public function order(Security $security, ProductRepository $productRepository, SessionInterface $session, ManagerRegistry $doctrine): Response
     {
         $user = $security->getUser();
         $cart = $session->get('cart', []);
@@ -85,7 +107,8 @@ class CartController extends AbstractController
         }
 
         if (!$user) {
-            return $this->redirectToRoute('login');
+            $session->set('redirection', 'cart');
+            return $this->redirectToRoute('login', ['_target_path' => '/cart']);
         }
 
         foreach ($cart as $id => $quantity) {

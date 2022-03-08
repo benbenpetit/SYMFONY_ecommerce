@@ -1,0 +1,58 @@
+.command {
+  &__wrapper {
+    border: 1px solid #111;
+    margin-top: 20px;
+  }
+
+  &__list {
+    &__item {
+      padding: 1.4em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      column-gap: 20px;
+      row-gap: 10px;
+
+      &:not(:last-child) {
+        border-bottom: 1px solid #111;
+      }
+
+      &__left {
+        flex: 1 1 0;
+        min-width: 200px;
+
+        a {
+          display: block;
+          width: 100%;
+          overflow: hidden;
+
+          img {
+            height: 100%;
+            max-height: 26vh;
+            width: 100%;
+            object-fit: cover;
+            transform: scale(1);
+            transition: transform .5s cubic-bezier(0.4, 0, 0, 1);
+
+            &:hover {
+              transform: scale(1.1);
+            }
+          }
+        }
+      }
+
+      &__right {
+        flex: 2 1 200px;
+        display: flex;
+        flex-direction: column;
+
+        &:hover {
+          span {
+            text-decoration: underline;
+          }
+        }
+      }
+    }
+  }
+}

@@ -15,6 +15,7 @@ Encore
   .addEntry('app', './assets/app.js')
   .addEntry('addToCart', './assets/scripts/addToCart.js')
   .addEntry('menu', './assets/scripts/menu.js')
+  .addEntry('quantity', './assets/scripts/quantity.js')
   
   .copyFiles({
     from: "./assets/images",

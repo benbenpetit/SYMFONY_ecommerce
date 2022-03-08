@@ -5,49 +5,61 @@
 {% block body %}
 	<section class="container big-padding" data-scroll-section>
 		<div class="cart-wrapper">
-            <div class="listing">
-                {% if items %}
-                    <ul>
-                        {% for item in items %}
-                            <li class="item">
-                                <div class="item__left">
-                                    <a href="{{ path('product', {'id': item.product.id}) }}">
-                                        <div class="img-wrapper">
-                                            <img src="{{ asset('/build/images/' ~ item.product.imagePath) }}" alt="">
-                                        </div>
-                                        <span class="name">{{item.product.name}}</span>
-                                    </a>
-                                </div>
-                                <div class="item__right">
-                                    <span class="quantity">{{item.quantity}}</span>
-                                </div>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    <div class="listing__nothing">
-                        <h3>Vous n'avez pas encore ajouté d'article</h3>
-                        <a href="{{ path('home') }}" class="btn-primary">Retour</a>
-                    </div>
-                {% endif %}
-            </div>
-            
-            <aside class="recap" data-scroll data-scroll-sticky data-scroll-target=".listing" data-scroll-offset="-80, 100">
-                <h2>Total</h2>
-                <div class="recap__grider">
-                    <span class="recap__grider__title">Sous-total</span>
-                    <span class="recap__grider__price">{{total}},00 €</span>
-                </div>
-                <div class="recap__grider">
-                    <span class="recap__grider__title">Frais de livraison</span>
-                    <span class="recap__grider__price">00,00 €</span>
-                </div>
-                <div class="recap__grider -total">
-                    <span class="recap__grider__title">Total</span>
-                    <span class="recap__grider__price">{{total}},00 €</span>
-                </div>
-                <a href="{{ path('cart_order') }}" class="recap__command btn-primary">Commander</a>
-            </aside>
-        </div>
+			<div class="listing">
+				{% if items %}
+					<ul>
+						{% for item in items %}
+							<li class="item js-item" data-item-id="{{ item.product.id }}">
+								<div class="item__left">
+									<a href="{{ path('product', {'id': item.product.id}) }}">
+										<div class="img-wrapper">
+											<img src="{{ asset('/build/images/' ~ item.product.imagePath) }}" alt="">
+										</div>
+										<span class="name">{{item.product.name}}</span>
+									</a>
+								</div>
+								<div class="item__right">
+									<div class="quantity">
+										<button class="quantity__button -minus js-quantity-button"></button>
+										<span class="quantity__counter">{{item.quantity}}</span>
+										<button class="quantity__button -plus js-quantity-button"></button>
+									</div>
+									<span class="price">{{item.product.price * item.quantity}},00€</span>
+								</div>
+							</li>
+						{% endfor %}
+					</ul>
+				{% else %}
+					<div class="listing__nothing">
+						<h3>Vous n'avez pas encore ajouté d'article</h3>
+						<a href="{{ path('home') }}" class="btn-primary">Retour</a>
+					</div>
+				{% endif %}
+			</div>
+
+			<aside class="recap" data-scroll data-scroll-sticky data-scroll-target=".listing" data-scroll-offset="-80, 100">
+				<h2>Total</h2>
+				<div class="recap__grider">
+					<span class="recap__grider__title">Sous-total</span>
+					<span class="recap__grider__price">{{total}},00 €</span>
+				</div>
+				<div class="recap__grider">
+					<span class="recap__grider__title">Frais de livraison</span>
+					<span class="recap__grider__price">00,00 €</span>
+				</div>
+				<div class="recap__grider -total">
+					<span class="recap__grider__title">Total</span>
+					<span class="recap__grider__price">{{total}},00 €</span>
+				</div>
+				<a href="{{ path('cart_order') }}" class="recap__command btn-primary">Commander</a>
+			</aside>
+		</div>
 	</section>
+	{% block javascripts %}
+		{% if items %}
+			{{ encore_entry_script_tags('app') }}
+			{{ encore_entry_script_tags('menu') }}
+			{{ encore_entry_script_tags('quantity') }}
+		{% endif %}
+	{% endblock %}
 {% endblock %}

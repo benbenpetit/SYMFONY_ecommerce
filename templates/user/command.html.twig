@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+    <section class="big-padding container command">
+        <h1>Commande n°{{command.id}}</h1>
+        <div class="command__wrapper">
+            <ul class="command__list">
+                {% for item in items %}
+                    <li class="command__list__item">
+                        <div class="command__list__item__left">
+                          <a href="{{ path('product', {'id': item.id}) }}">
+                            <img src="{{ asset('/build/images/' ~ item.imagePath) }}" alt="">
+                          </a>
+                        </div>
+                        <a href="{{ path('product', {'id': item.id}) }}" class="command__list__item__right">
+                            <span>{{ item.name }}</span>
+                            <span>{{ item.price }},00€</span>
+                        </a>
+                    </li>
+                {% endfor %}  
+            </ul>
+        </div>
+    </section>
+{% endblock %}

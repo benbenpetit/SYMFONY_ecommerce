@@ -10,7 +10,7 @@
                 {% for command in commands %}
                     <li class="commands__list__item">
                         <div class="commands__list__item__left">
-                            <span>Commande n°{{ command.id }}</span>
+                            <a href="{{ path('user_profile_command', {'id': command.id}) }}">Commande n°{{ command.id }}</a>
                         </div>
                         <div class="commands__list__item__right">
                             <span>le {{ command.date | date('d/m/Y') }}</span>

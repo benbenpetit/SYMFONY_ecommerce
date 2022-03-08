@@ -9,5 +9,4 @@ document.addEventListener('click', (e) => {
       profileModal.classList.remove('is-visible');
     }
   }
-  console.log('in');
 });

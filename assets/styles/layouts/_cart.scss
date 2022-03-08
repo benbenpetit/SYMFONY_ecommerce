@@ -3,7 +3,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  column-gap: 20px;
+  gap: 20px;
 
   .listing {
     flex: 1 1 300px;
@@ -16,6 +16,8 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 14px;
 
         &:not(:last-child) {
           border-bottom: 1px solid #111;
@@ -41,6 +43,59 @@
             .name {
               &:hover {
                 text-decoration: underline;
+              }
+            }
+          }
+        }
+
+        &__right {
+          display: flex;
+          align-items: center;
+          column-gap: 20px;
+
+          .quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+
+            &__button {
+              position: relative;
+              box-sizing: content-box;
+              padding: 4px;
+              border: 2px solid #111;
+              height: 1ch;
+              width: 1ch;
+              text-align: center;
+
+              &:hover {
+                background-color: #111;
+
+                &::after {
+                  color: white;
+                }
+              }
+
+              &:active {
+                transform: translateY(1px);
+              }
+
+              &::after {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+              }
+
+              &.-minus {
+                &::after {
+                  content: "-";
+                }
+              }
+
+              &.-plus {
+                &::after {
+                  content: "+";
+                }
               }
             }
           }
